@@ -45,8 +45,8 @@ const Hero = () => {
           </div>
           
           <div className="mt-6 flex flex-wrap gap-2">
-            <span className="text-sm text-muted-foreground">Popular:</span>
-            {["Carpentry", "Plumbing", "Electrical", "Tailoring"].map((service) => (
+            <span className="text-sm text-muted-foreground">Maarufu:</span>
+            {["Useremala", "Bomba", "Stima", "Ushoni"].map((service) => (
               <Button 
                 key={service}
                 variant="outline" 

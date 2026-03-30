@@ -34,7 +34,8 @@ const ServiceCategories = () => {
                     <Icon className="h-6 w-6 text-primary" />
                   </div>
                   <h3 className="font-semibold mb-1 text-foreground">{category.name}</h3>
-                  <p className="text-sm text-muted-foreground">{category.count} artisans</p>
+                  <p className="text-xs text-muted-foreground/70">{category.subtitle}</p>
+                  <p className="text-sm text-muted-foreground mt-1">{category.count} mafundi</p>
                 </CardContent>
               </Card>
             );

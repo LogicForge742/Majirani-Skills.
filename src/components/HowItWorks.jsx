@@ -29,9 +29,9 @@ const HowItWorks = () => {
     <section className="py-20 bg-muted/30">
       <div className="container">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4 text-foreground">How It Works</h2>
+          <h2 className="text-4xl font-bold mb-4 text-foreground">Jinsi Inavyofanya Kazi</h2>
           <p className="text-xl text-muted-foreground">
-            Find trusted artisans in four simple steps
+            Pata fundi wa kuaminika kwa hatua nne rahisi
           </p>
         </div>
         

@@ -96,7 +96,7 @@ const FeaturedArtisans = () => {
                 </p>
                 
                 <Button variant="outline" className="w-full">
-                  View Profile
+                  Tazama Wasifu
                 </Button>
               </CardContent>
             </Card>
