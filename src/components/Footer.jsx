@@ -34,11 +34,11 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="font-semibold mb-4 text-foreground">Company</h4>
+            <h4 className="font-semibold mb-4 text-foreground">Kampuni</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Contact</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Kuhusu Sisi</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Wasiliana Nasi</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Sera ya Faragha</a></li>
             </ul>
           </div>
         </div>
