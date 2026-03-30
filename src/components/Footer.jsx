@@ -25,11 +25,11 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="font-semibold mb-4 text-foreground">For Artisans</h4>
+            <h4 className="font-semibold mb-4 text-foreground">Kwa Mafundi</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground transition-colors">Join Platform</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Pricing</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Success Stories</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Jiunge na Jukwaa</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Bei</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Hadithi za Mafanikio</a></li>
             </ul>
           </div>
           
