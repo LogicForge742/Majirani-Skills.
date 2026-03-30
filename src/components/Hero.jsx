@@ -39,7 +39,7 @@ const Hero = () => {
                 />
               </div>
               <Button size="lg" variant="hero" className="md:w-auto">
-                Search Artisans
+                Tafuta Fundi
               </Button>
             </div>
           </div>
