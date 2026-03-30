@@ -27,7 +27,7 @@ const Hero = () => {
               <div className="flex-1 relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                 <Input 
-                  placeholder="What service do you need?"
+                  placeholder="Unahitaji huduma gani?"
                   className="pl-10 bg-background"
                 />
               </div>
