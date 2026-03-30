@@ -19,7 +19,7 @@ const Hero = () => {
             Pata <span className="text-primary">Fundi</span> wa Kuaminika Karibu Nawe
           </h1>
           <p className="text-xl text-muted-foreground mb-8">
-            Connect with skilled carpenters, tailors, electricians, and more in your community. Quality work, verified professionals.
+            Ungana na mafundi bora — seremala, mshoni, fundi stima na wengi zaidi katika mtaa wako. Kazi bora, wataalamu waliothibitishwa.
           </p>
           
           <div className="bg-card/90 backdrop-blur p-4 rounded-lg shadow-lg border border-border">
