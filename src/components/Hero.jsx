@@ -27,26 +27,26 @@ const Hero = () => {
               <div className="flex-1 relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                 <Input 
-                  placeholder="Unahitaji huduma gani?"
+                  placeholder="What service do you need?"
                   className="pl-10 bg-background"
                 />
               </div>
               <div className="flex-1 relative">
                 <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                 <Input 
-                  placeholder="Eneo lako"
+                  placeholder="Your location"
                   className="pl-10 bg-background"
                 />
               </div>
               <Button size="lg" variant="hero" className="md:w-auto">
-                Tafuta Fundi
+                Search Artisans
               </Button>
             </div>
           </div>
           
           <div className="mt-6 flex flex-wrap gap-2">
-            <span className="text-sm text-muted-foreground">Maarufu:</span>
-            {["Useremala", "Bomba", "Stima", "Ushoni"].map((service) => (
+             <span className="text-sm text-muted-foreground">Popular:</span>
+             {["Carpentry", "Plumbing", "Electrical", "Tailoring"].map((service) => (
               <Button 
                 key={service}
                 variant="outline" 
