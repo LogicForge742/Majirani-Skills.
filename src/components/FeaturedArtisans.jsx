@@ -27,7 +27,7 @@ const artisans = [
   {
     id: 3,
     name: "David Ochieng",
-    skill: "Licensed Electrician",
+    skill: "Fundi Stima",
     location: "Kilimani",
     rating: 4.8,
     reviews: 156,
