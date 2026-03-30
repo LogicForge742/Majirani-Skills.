@@ -87,7 +87,7 @@ const FeaturedArtisans = () => {
                     <span className="font-semibold text-foreground">{artisan.rating}</span>
                   </div>
                   <span className="text-sm text-muted-foreground">
-                    ({artisan.reviews} reviews)
+                    ({artisan.reviews} maoni)
                   </span>
                 </div>
                 
