@@ -2,12 +2,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Hammer, Scissors, Zap, Wrench, PaintBucket, Home } from "lucide-react";
 
 const categories = [
-  { name: "Carpentry", icon: Hammer, count: 45 },
-  { name: "Tailoring", icon: Scissors, count: 38 },
-  { name: "Electrical", icon: Zap, count: 32 },
-  { name: "Plumbing", icon: Wrench, count: 28 },
-  { name: "Painting", icon: PaintBucket, count: 26 },
-  { name: "Home Repair", icon: Home, count: 52 },
+  { name: "Useremala", subtitle: "Carpentry", icon: Hammer, count: 45 },
+  { name: "Ushoni", subtitle: "Tailoring", icon: Scissors, count: 38 },
+  { name: "Fundi Stima", subtitle: "Electrical", icon: Zap, count: 32 },
+  { name: "Fundi Bomba", subtitle: "Plumbing", icon: Wrench, count: 28 },
+  { name: "Rangi", subtitle: "Painting", icon: PaintBucket, count: 26 },
+  { name: "Ukarabati", subtitle: "Home Repair", icon: Home, count: 52 },
 ];
 
 const ServiceCategories = () => {
