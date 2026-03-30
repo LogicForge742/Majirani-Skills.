@@ -7,7 +7,7 @@ const artisans = [
   {
     id: 1,
     name: "John Mwangi",
-    skill: "Master Carpenter",
+    skill: "Fundi Seremala",
     location: "Nairobi East",
     rating: 4.9,
     reviews: 127,
@@ -17,7 +17,7 @@ const artisans = [
   {
     id: 2,
     name: "Amina Hassan",
-    skill: "Fashion Tailor",
+    skill: "Fundi Mshoni",
     location: "Westlands",
     rating: 5.0,
     reviews: 93,
@@ -27,7 +27,7 @@ const artisans = [
   {
     id: 3,
     name: "David Ochieng",
-    skill: "Licensed Electrician",
+    skill: "Fundi Stima",
     location: "Kilimani",
     rating: 4.8,
     reviews: 156,
@@ -37,7 +37,7 @@ const artisans = [
   {
     id: 4,
     name: "Grace Wambui",
-    skill: "Interior Painter",
+    skill: "Fundi Rangi",
     location: "Karen",
     rating: 4.9,
     reviews: 84,
@@ -51,9 +51,9 @@ const FeaturedArtisans = () => {
     <section className="py-20">
       <div className="container">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4 text-foreground">Featured Artisans</h2>
+          <h2 className="text-4xl font-bold mb-4 text-foreground">Mafundi Bora</h2>
           <p className="text-xl text-muted-foreground">
-            Trusted professionals with proven track records
+            Wataalamu wa kuaminika wenye uzoefu uliothibitishwa
           </p>
         </div>
         
@@ -67,7 +67,7 @@ const FeaturedArtisans = () => {
                   </div>
                   {artisan.verified && (
                     <Badge className="bg-primary/10 text-primary border-primary/20">
-                      Verified
+                      Amethibitishwa
                     </Badge>
                   )}
                 </div>
@@ -87,16 +87,16 @@ const FeaturedArtisans = () => {
                     <span className="font-semibold text-foreground">{artisan.rating}</span>
                   </div>
                   <span className="text-sm text-muted-foreground">
-                    ({artisan.reviews} reviews)
+                    ({artisan.reviews} maoni)
                   </span>
                 </div>
                 
                 <p className="text-sm text-muted-foreground mb-4">
-                  {artisan.experience} experience
+                  Uzoefu: {artisan.experience}
                 </p>
                 
                 <Button variant="outline" className="w-full">
-                  View Profile
+                  Tazama Wasifu
                 </Button>
               </CardContent>
             </Card>

@@ -11,40 +11,40 @@ const Footer = () => {
               <span className="font-bold text-lg text-foreground">Majirani Skills</span>
             </div>
             <p className="text-sm text-muted-foreground">
-              Connecting communities with trusted local artisans
+              Kuunganisha jamii na mafundi wa kuaminika
             </p>
           </div>
           
           <div>
-            <h4 className="font-semibold mb-4 text-foreground">For Clients</h4>
+            <h4 className="font-semibold mb-4 text-foreground">Kwa Wateja</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground transition-colors">Find Artisans</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Browse Services</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">How It Works</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Tafuta Fundi</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Angalia Huduma</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Jinsi Inavyofanya Kazi</a></li>
             </ul>
           </div>
           
           <div>
-            <h4 className="font-semibold mb-4 text-foreground">For Artisans</h4>
+            <h4 className="font-semibold mb-4 text-foreground">Kwa Mafundi</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground transition-colors">Join Platform</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Pricing</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Success Stories</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Jiunge na Jukwaa</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Bei</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Hadithi za Mafanikio</a></li>
             </ul>
           </div>
           
           <div>
-            <h4 className="font-semibold mb-4 text-foreground">Company</h4>
+            <h4 className="font-semibold mb-4 text-foreground">Kampuni</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Contact</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Kuhusu Sisi</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Wasiliana Nasi</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Sera ya Faragha</a></li>
             </ul>
           </div>
         </div>
         
         <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; 2024 Majirani Skills. All rights reserved.</p>
+          <p>&copy; 2024 Majirani Skills. Haki zote zimehifadhiwa.</p>
         </div>
       </div>
     </footer>

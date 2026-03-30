@@ -4,23 +4,23 @@ import { Card, CardContent } from "@/components/ui/card";
 const steps = [
   {
     icon: Search,
-    title: "Search & Browse",
-    description: "Find artisans by service, location, and ratings in your community",
+    title: "Tafuta Fundi",
+    description: "Pata mafundi kwa huduma, eneo, na maoni katika mtaa wako",
   },
   {
     icon: UserCheck,
-    title: "View Profiles",
-    description: "Review portfolios, ratings, and verified credentials before choosing",
+    title: "Angalia Wasifu",
+    description: "Kagua kazi zao, maoni, na vyeti kabla ya kuchagua",
   },
   {
     icon: MessageCircle,
-    title: "Connect Directly",
-    description: "Reach out to artisans and discuss your project requirements",
+    title: "Wasiliana Moja kwa Moja",
+    description: "Ongea na fundi kuhusu mradi wako na mahitaji yako",
   },
   {
     icon: Star,
-    title: "Leave Reviews",
-    description: "Share your experience to help others make informed decisions",
+    title: "Acha Maoni",
+    description: "Shiriki uzoefu wako kusaidia wengine kufanya maamuzi bora",
   },
 ];
 
@@ -29,9 +29,9 @@ const HowItWorks = () => {
     <section className="py-20 bg-muted/30">
       <div className="container">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4 text-foreground">How It Works</h2>
+          <h2 className="text-4xl font-bold mb-4 text-foreground">Jinsi Inavyofanya Kazi</h2>
           <p className="text-xl text-muted-foreground">
-            Find trusted artisans in four simple steps
+            Pata fundi wa kuaminika kwa hatua nne rahisi
           </p>
         </div>
         

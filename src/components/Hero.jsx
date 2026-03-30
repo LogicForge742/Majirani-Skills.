@@ -16,10 +16,10 @@ const Hero = () => {
       <div className="container relative z-10 py-20">
         <div className="max-w-2xl">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 text-foreground">
-            Find Trusted Local <span className="text-primary">Artisans</span> Near You
+            Pata <span className="text-primary">Fundi</span> wa Kuaminika Karibu Nawe
           </h1>
           <p className="text-xl text-muted-foreground mb-8">
-            Connect with skilled carpenters, tailors, electricians, and more in your community. Quality work, verified professionals.
+            Ungana na mafundi bora — seremala, mshoni, fundi stima na wengi zaidi katika mtaa wako. Kazi bora, wataalamu waliothibitishwa.
           </p>
           
           <div className="bg-card/90 backdrop-blur p-4 rounded-lg shadow-lg border border-border">
@@ -27,26 +27,26 @@ const Hero = () => {
               <div className="flex-1 relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                 <Input 
-                  placeholder="What service do you need?"
+                  placeholder="Unahitaji huduma gani?"
                   className="pl-10 bg-background"
                 />
               </div>
               <div className="flex-1 relative">
                 <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                 <Input 
-                  placeholder="Your location"
+                  placeholder="Eneo lako"
                   className="pl-10 bg-background"
                 />
               </div>
               <Button size="lg" variant="hero" className="md:w-auto">
-                Search Artisans
+                Tafuta Fundi
               </Button>
             </div>
           </div>
           
           <div className="mt-6 flex flex-wrap gap-2">
-            <span className="text-sm text-muted-foreground">Popular:</span>
-            {["Carpentry", "Plumbing", "Electrical", "Tailoring"].map((service) => (
+            <span className="text-sm text-muted-foreground">Maarufu:</span>
+            {["Useremala", "Bomba", "Stima", "Ushoni"].map((service) => (
               <Button 
                 key={service}
                 variant="outline" 
