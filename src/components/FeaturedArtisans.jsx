@@ -51,9 +51,9 @@ const FeaturedArtisans = () => {
     <section className="py-20">
       <div className="container">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4 text-foreground">Featured Artisans</h2>
+          <h2 className="text-4xl font-bold mb-4 text-foreground">Mafundi Bora</h2>
           <p className="text-xl text-muted-foreground">
-            Trusted professionals with proven track records
+            Wataalamu wa kuaminika wenye uzoefu uliothibitishwa
           </p>
         </div>
         
