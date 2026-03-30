@@ -16,7 +16,7 @@ const Hero = () => {
       <div className="container relative z-10 py-20">
         <div className="max-w-2xl">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 text-foreground">
-            Find Trusted Local <span className="text-primary">Artisans</span> Near You
+            Pata <span className="text-primary">Fundi</span> wa Kuaminika Karibu Nawe
           </h1>
           <p className="text-xl text-muted-foreground mb-8">
             Connect with skilled carpenters, tailors, electricians, and more in your community. Quality work, verified professionals.
