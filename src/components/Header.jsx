@@ -14,16 +14,16 @@ const Header = () => {
         
         <nav className="hidden md:flex items-center gap-6">
           <a href="#services" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-            Huduma
+            Services
           </a>
           <a href="#artisans" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-            Tafuta Fundi
+            Find Artisans
           </a>
           <a href="#how-it-works" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-            Jinsi Inavyofanya Kazi
+            How It Works
           </a>
-          <Button variant="outline">Ingia</Button>
-          <Button>Jiunge kama Fundi</Button>
+          <Button variant="outline">Sign In</Button>
+          <Button>Join as Artisan</Button>
         </nav>
         
         <Button variant="ghost" size="icon" className="md:hidden">
