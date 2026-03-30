@@ -15,9 +15,9 @@ const ServiceCategories = () => {
     <section className="py-20 bg-muted/30">
       <div className="container">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4 text-foreground">Browse by Service</h2>
+          <h2 className="text-4xl font-bold mb-4 text-foreground">Huduma Zetu</h2>
           <p className="text-xl text-muted-foreground">
-            Find the perfect artisan for your needs
+            Pata fundi anayefaa kwa mahitaji yako
           </p>
         </div>
         
