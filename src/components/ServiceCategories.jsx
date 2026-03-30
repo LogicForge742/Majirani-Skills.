@@ -2,12 +2,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Hammer, Scissors, Zap, Wrench, PaintBucket, Home } from "lucide-react";
 
 const categories = [
-  { name: "Useremala", subtitle: "Carpentry", icon: Hammer, count: 45 },
-  { name: "Ushoni", subtitle: "Tailoring", icon: Scissors, count: 38 },
-  { name: "Fundi Stima", subtitle: "Electrical", icon: Zap, count: 32 },
-  { name: "Fundi Bomba", subtitle: "Plumbing", icon: Wrench, count: 28 },
-  { name: "Rangi", subtitle: "Painting", icon: PaintBucket, count: 26 },
-  { name: "Ukarabati", subtitle: "Home Repair", icon: Home, count: 52 },
+  { name: "Carpentry", icon: Hammer, count: 45 },
+  { name: "Tailoring", icon: Scissors, count: 38 },
+  { name: "Electrical", icon: Zap, count: 32 },
+  { name: "Plumbing", icon: Wrench, count: 28 },
+  { name: "Painting", icon: PaintBucket, count: 26 },
+  { name: "Home Repair", icon: Home, count: 52 },
 ];
 
 const ServiceCategories = () => {
@@ -15,9 +15,9 @@ const ServiceCategories = () => {
     <section className="py-20 bg-muted/30">
       <div className="container">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4 text-foreground">Huduma Zetu</h2>
+          <h2 className="text-4xl font-bold mb-4 text-foreground">Browse by Service</h2>
           <p className="text-xl text-muted-foreground">
-            Pata fundi anayefaa kwa mahitaji yako
+            Find the perfect artisan for your needs
           </p>
         </div>
         
@@ -34,8 +34,7 @@ const ServiceCategories = () => {
                     <Icon className="h-6 w-6 text-primary" />
                   </div>
                   <h3 className="font-semibold mb-1 text-foreground">{category.name}</h3>
-                  <p className="text-xs text-muted-foreground/70">{category.subtitle}</p>
-                  <p className="text-sm text-muted-foreground mt-1">{category.count} mafundi</p>
+                  <p className="text-sm text-muted-foreground">{category.count} artisans</p>
                 </CardContent>
               </Card>
             );
