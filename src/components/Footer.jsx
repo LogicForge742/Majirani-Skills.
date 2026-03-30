@@ -16,11 +16,11 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="font-semibold mb-4 text-foreground">For Clients</h4>
+            <h4 className="font-semibold mb-4 text-foreground">Kwa Wateja</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground transition-colors">Find Artisans</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Browse Services</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">How It Works</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Tafuta Fundi</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Angalia Huduma</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Jinsi Inavyofanya Kazi</a></li>
             </ul>
           </div>
           
