@@ -17,7 +17,7 @@ const artisans = [
   {
     id: 2,
     name: "Amina Hassan",
-    skill: "Fashion Tailor",
+    skill: "Fundi Mshoni",
     location: "Westlands",
     rating: 5.0,
     reviews: 93,
