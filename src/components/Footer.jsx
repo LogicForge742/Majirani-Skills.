@@ -11,7 +11,7 @@ const Footer = () => {
               <span className="font-bold text-lg text-foreground">Majirani Skills</span>
             </div>
             <p className="text-sm text-muted-foreground">
-              Connecting communities with trusted local artisans
+              Kuunganisha jamii na mafundi wa kuaminika
             </p>
           </div>
           
