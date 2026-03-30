@@ -92,7 +92,7 @@ const FeaturedArtisans = () => {
                 </div>
                 
                 <p className="text-sm text-muted-foreground mb-4">
-                  {artisan.experience} experience
+                  Uzoefu: {artisan.experience}
                 </p>
                 
                 <Button variant="outline" className="w-full">
