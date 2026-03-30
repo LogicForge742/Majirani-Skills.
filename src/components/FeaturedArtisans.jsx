@@ -67,7 +67,7 @@ const FeaturedArtisans = () => {
                   </div>
                   {artisan.verified && (
                     <Badge className="bg-primary/10 text-primary border-primary/20">
-                      Verified
+                      Amethibitishwa
                     </Badge>
                   )}
                 </div>
