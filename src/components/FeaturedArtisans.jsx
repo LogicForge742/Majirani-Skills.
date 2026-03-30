@@ -7,7 +7,7 @@ const artisans = [
   {
     id: 1,
     name: "John Mwangi",
-    skill: "Master Carpenter",
+    skill: "Fundi Seremala",
     location: "Nairobi East",
     rating: 4.9,
     reviews: 127,
