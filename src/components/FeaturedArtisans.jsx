@@ -37,7 +37,7 @@ const artisans = [
   {
     id: 4,
     name: "Grace Wambui",
-    skill: "Interior Painter",
+    skill: "Fundi Rangi",
     location: "Karen",
     rating: 4.9,
     reviews: 84,
