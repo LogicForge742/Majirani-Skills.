@@ -1,10 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { Logo } from "@/components/ui/Logo";
 
 /**
  * Top navigation bar with brand, in-page links and auth actions.
  */
 const Navbar = () => {
+  const location = useLocation();
+  const isSignInPage = location.pathname === "/signin";
   const navLinks = [
     { href: "#services", label: "Services" },
     { href: "#artisans", label: "Find Artisans" },
@@ -12,13 +16,11 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+    <header className="border-b border-border bg-background sticky top-0 z-50">
       <div className="container flex h-16 items-center justify-between">
-        <a href="/" className="flex items-center gap-2" aria-label="Majirani Skills home">
-          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground font-bold text-xl">
-            M
-          </div>
-          <span className="font-bold text-xl text-foreground">Majirani Skills</span>
+        <a href="/" className="flex items-center gap-1 text-primary hover:opacity-90 transition-opacity" aria-label="Majirani Skills home">
+          <Logo className="w-14 h-14 mix-blend-multiply object-contain contrast-[1.1]" />
+          <span className="font-extrabold text-2xl text-foreground">Majirani Skills</span>
         </a>
 
         <nav aria-label="Main navigation" className="hidden md:flex items-center gap-6">
@@ -31,8 +33,14 @@ const Navbar = () => {
               {link.label}
             </a>
           ))}
-          <Button variant="outline">Sign In</Button>
-          <Button>Join as Artisan</Button>
+          {!isSignInPage && (
+            <Button variant="outline" asChild>
+              <Link to="/signin">Sign In</Link>
+            </Button>
+          )}
+          <Button asChild>
+            <Link to="/signup">Join as Artisan</Link>
+          </Button>
         </nav>
 
         <Button variant="ghost" size="icon" className="md:hidden" aria-label="Open menu">

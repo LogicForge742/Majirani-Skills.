@@ -1,5 +1,4 @@
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import MainLayout from "@/components/layout/MainLayout";
 import Hero from "@/features/search/Hero";
 import ServiceCategoriesGrid from "@/features/services/ServiceCategoriesGrid";
 import FeaturedArtisans from "@/features/artisans/FeaturedArtisans";
@@ -10,16 +9,12 @@ import HowItWorks from "@/features/services/HowItWorks";
  */
 const Index = () => {
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <main>
-        <Hero />
-        <ServiceCategoriesGrid />
-        <FeaturedArtisans />
-        <HowItWorks />
-      </main>
-      <Footer />
-    </div>
+    <MainLayout>
+      <Hero />
+      <ServiceCategoriesGrid />
+      <FeaturedArtisans />
+      <HowItWorks />
+    </MainLayout>
   );
 };
 

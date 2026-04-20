@@ -7,41 +7,67 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ─────────────────────────────────────────────
+// Enums
+// ─────────────────────────────────────────────
+
 enum Role {
   CLIENT
   ARTISAN
   ADMIN
 }
 
+// ─────────────────────────────────────────────
+// User — core identity record
+// ─────────────────────────────────────────────
+
 model User {
   id        String   @id @default(cuid())
   email     String   @unique
-  password  String
+  password  String?
+  googleId  String?  @unique
   name      String
+  phone     String?
+  avatarUrl String?
   role      Role     @default(CLIENT)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  artisan   Artisan?
-  reviews   Review[] @relation("ReviewAuthor")
+  artisan Artisan?
+  reviews Review[]  @relation("ReviewAuthor")
+
+  @@map("users")
 }
 
+// ─────────────────────────────────────────────
+// Artisan — extended profile for artisan users
+// ─────────────────────────────────────────────
+
 model Artisan {
-  id         String   @id @default(cuid())
-  userId     String   @unique
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  skill      String
-  bio        String?
-  location   String
-  experience String
-  verified   Boolean  @default(false)
-  rating     Float    @default(0)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id           String   @id @default(cuid())
+  userId       String   @unique
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skill        String
+  bio          String?
+  location     String
+  county       String?
+  experience   String
+  availability Boolean  @default(true)
+  verified     Boolean  @default(false)
+  rating       Float    @default(0)
+  reviewCount  Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   services Service[]
   reviews  Review[]
+
+  @@map("artisans")
 }
+
+// ─────────────────────────────────────────────
+// Service — a specific offering by an artisan
+// ─────────────────────────────────────────────
 
 model Service {
   id          String   @id @default(cuid())
@@ -51,9 +77,17 @@ model Service {
   category    String
   description String
   price       Float
+  priceUnit   String   @default("per job") // e.g. "per hour", "per day", "per job"
+  isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@map("services")
 }
+
+// ─────────────────────────────────────────────
+// Review — client reviews left for an artisan
+// ─────────────────────────────────────────────
 
 model Review {
   id        String   @id @default(cuid())
@@ -61,7 +95,9 @@ model Review {
   artisan   Artisan  @relation(fields: [artisanId], references: [id], onDelete: Cascade)
   authorId  String
   author    User     @relation("ReviewAuthor", fields: [authorId], references: [id], onDelete: Cascade)
-  rating    Int
+  rating    Int      // 1 – 5 stars
   comment   String
   createdAt DateTime @default(now())
+
+  @@map("reviews")
 }

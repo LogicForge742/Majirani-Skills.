@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CLIENT
+  ARTISAN
+  ADMIN
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      Role     @default(CLIENT)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  artisan   Artisan?
+  reviews   Review[] @relation("ReviewAuthor")
+}
+
+model Artisan {
+  id         String   @id @default(cuid())
+  userId     String   @unique
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skill      String
+  bio        String?
+  location   String
+  experience String
+  verified   Boolean  @default(false)
+  rating     Float    @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  services Service[]
+  reviews  Review[]
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  artisanId   String
+  artisan     Artisan  @relation(fields: [artisanId], references: [id], onDelete: Cascade)
+  title       String
+  category    String
+  description String
+  price       Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  artisanId String
+  artisan   Artisan  @relation(fields: [artisanId], references: [id], onDelete: Cascade)
+  authorId  String
+  author    User     @relation("ReviewAuthor", fields: [authorId], references: [id], onDelete: Cascade)
+  rating    Int
+  comment   String
+  createdAt DateTime @default(now())
+}
