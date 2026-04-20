@@ -1,17 +1,20 @@
-import Header from "@/components/Header";
-import Hero from "@/components/Hero";
-import ServiceCategories from "@/components/ServiceCategories";
-import FeaturedArtisans from "@/components/FeaturedArtisans";
-import HowItWorks from "@/components/HowItWorks";
-import Footer from "@/components/Footer";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import Hero from "@/features/search/Hero";
+import ServiceCategoriesGrid from "@/features/services/ServiceCategoriesGrid";
+import FeaturedArtisans from "@/features/artisans/FeaturedArtisans";
+import HowItWorks from "@/features/services/HowItWorks";
 
+/**
+ * Public landing page composing all marketing sections.
+ */
 const Index = () => {
   return (
     <div className="min-h-screen">
-      <Header />
+      <Navbar />
       <main>
         <Hero />
-        <ServiceCategories />
+        <ServiceCategoriesGrid />
         <FeaturedArtisans />
         <HowItWorks />
       </main>
