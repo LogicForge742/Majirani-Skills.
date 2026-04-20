@@ -2,7 +2,7 @@
 
 **Majirani Skills** is a premium, full-stack marketplace designed to bridge the gap between skilled master artisans and local clients in Kenya. The platform focuses on high-aesthetic design and secure, role-based interaction, allowing users to discover heritage skills in their own neighborhoods.
 
-![Branding](public/image.png)
+<img src="public/image.png" alt="Branding" width="200" />
 
 ##  Key Features
 
