@@ -526,7 +526,7 @@ const ArtisanDashboard = () => {
                           </div>
                           <div className="flex text-amber-400">
                             {Array.from({ length: rev.rating }).map((_, i) => (
-                              <Star key={i} className="w-3 h-3 fill-current" />
+                              <Star key={`star-${rev.id ?? rev.author?.name}-${i}`} className="w-3 h-3 fill-current" />
                             ))}
                           </div>
                         </div>
@@ -560,7 +560,7 @@ const ArtisanDashboard = () => {
                     <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Next Actions</p>
                     {nextActions.map((act, index) => (
                       <div
-                        key={index}
+                        key={act.text}
                         onClick={act.action ? act.action : undefined}
                         className={`p-3 bg-gray-50 hover:bg-[#EAF5F4]/30 rounded-2xl border border-transparent hover:border-[#206965]/20 flex items-center justify-between transition-all cursor-pointer group`}
                       >
