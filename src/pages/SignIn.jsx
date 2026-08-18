@@ -33,13 +33,21 @@ const SignIn = () => {
       }
 
       // Save the token
-      localStorage.setItem("token", data.accessToken);
+      localStorage.setItem("token", data.access_token);
       if (data.user) {
         localStorage.setItem("user", JSON.stringify(data.user));
+        toast.success("Successfully signed in!");
+        if (data.user.role === "ADMIN") {
+          navigate("/admin/dashboard");
+        } else if (data.user.role === "ARTISAN") {
+          navigate("/artisan/dashboard");
+        } else {
+          navigate("/client/dashboard");
+        }
+      } else {
+        toast.success("Successfully signed in!");
+        navigate("/");
       }
-
-      toast.success("Successfully signed in!");
-      navigate("/"); // Redirect to dashboard/home
     } catch (err) {
       toast.error(err.message);
     } finally {

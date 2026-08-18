@@ -37,10 +37,16 @@ const SignUp = () => {
       localStorage.setItem("token", data.access_token);
       if (data.user) {
         localStorage.setItem("user", JSON.stringify(data.user));
+        toast.success("Account created successfully!");
+        if (data.user.role === "ARTISAN") {
+          navigate("/artisan/dashboard");
+        } else {
+          navigate("/client/dashboard");
+        }
+      } else {
+        toast.success("Account created successfully!");
+        navigate("/");
       }
-
-      toast.success("Account created successfully!");
-      navigate("/");
     } catch (err) {
       toast.error(err.message);
     } finally {

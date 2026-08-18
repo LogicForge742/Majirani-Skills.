@@ -11,13 +11,32 @@ const AuthCallback = () => {
     const token = searchParams.get("token");
 
     if (token) {
-      // Success: Save token and redirect
       localStorage.setItem("token", token);
-      toast.success("Successfully logged in with Google!");
       
-      // Optionally fetch user info here if not sent via URL
-      // For now, redirect home
-      navigate("/");
+      fetch("http://localhost:3000/api/users/me", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error("Failed to fetch user profile.");
+          return res.json();
+        })
+        .then((user) => {
+          localStorage.setItem("user", JSON.stringify(user));
+          toast.success("Successfully logged in with Google!");
+          if (user.role === "ADMIN") {
+            navigate("/admin/dashboard");
+          } else if (user.role === "ARTISAN") {
+            navigate("/artisan/dashboard");
+          } else {
+            navigate("/client/dashboard");
+          }
+        })
+        .catch((err) => {
+          toast.error(err.message || "Failed to retrieve user details.");
+          navigate("/signin");
+        });
     } else {
       // Failure
       toast.error("Google authentication failed. Please try again.");
