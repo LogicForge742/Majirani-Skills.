@@ -15,4 +15,13 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: ["./src/test/setup.js"],
+    include: ["src/**/*.{test,spec}.{js,jsx,ts,tsx}"],
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
 }));
