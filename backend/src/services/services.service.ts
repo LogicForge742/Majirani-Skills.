@@ -47,7 +47,8 @@ export class ServicesService {
       },
     });
 
-    if (!service) throw new NotFoundException(`Service with ID ${id} not found.`);
+    if (!service)
+      throw new NotFoundException(`Service with ID ${id} not found.`);
     return service;
   }
 
@@ -67,7 +68,9 @@ export class ServicesService {
     if (!artisan) throw new NotFoundException('Artisan profile not found.');
 
     if (artisan.userId !== userId) {
-      throw new ForbiddenException('You can only add services to your own artisan profile.');
+      throw new ForbiddenException(
+        'You can only add services to your own artisan profile.',
+      );
     }
 
     return this.prisma.service.create({
@@ -75,13 +78,19 @@ export class ServicesService {
     });
   }
 
-  async update(serviceId: string, userId: string, userRole: string, dto: UpdateServiceDto) {
+  async update(
+    serviceId: string,
+    userId: string,
+    userRole: string,
+    dto: UpdateServiceDto,
+  ) {
     const service = await this.prisma.service.findUnique({
       where: { id: serviceId },
       include: { artisan: true },
     });
 
-    if (!service) throw new NotFoundException(`Service ${serviceId} not found.`);
+    if (!service)
+      throw new NotFoundException(`Service ${serviceId} not found.`);
 
     if (service.artisan.userId !== userId && userRole !== 'ADMIN') {
       throw new ForbiddenException('You can only edit your own services.');
@@ -96,7 +105,8 @@ export class ServicesService {
       include: { artisan: true },
     });
 
-    if (!service) throw new NotFoundException(`Service ${serviceId} not found.`);
+    if (!service)
+      throw new NotFoundException(`Service ${serviceId} not found.`);
 
     if (service.artisan.userId !== userId && userRole !== 'ADMIN') {
       throw new ForbiddenException('You can only delete your own services.');

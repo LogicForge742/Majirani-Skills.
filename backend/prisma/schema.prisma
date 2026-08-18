@@ -17,6 +17,14 @@ enum Role {
   ADMIN
 }
 
+enum VerificationStatus {
+  UNVERIFIED
+  PENDING
+  VERIFIED
+  REJECTED
+  SUSPENDED
+}
+
 // ─────────────────────────────────────────────
 // User — core identity record
 // ─────────────────────────────────────────────
@@ -34,35 +42,151 @@ model User {
   updatedAt DateTime @updatedAt
 
   artisan Artisan?
-  reviews Review[]  @relation("ReviewAuthor")
+  reviews Review[] @relation("ReviewAuthor")
 
   @@map("users")
 }
 
 // ─────────────────────────────────────────────
-// Artisan — extended profile for artisan users
+// Artisan — extended profile (separate from verification)
 // ─────────────────────────────────────────────
 
 model Artisan {
-  id           String   @id @default(cuid())
-  userId       String   @unique
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  skill        String
-  bio          String?
-  location     String
-  county       String?
-  experience   String
-  availability Boolean  @default(true)
-  verified     Boolean  @default(false)
-  rating       Float    @default(0)
-  reviewCount  Int      @default(0)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id             String  @id @default(cuid())
+  userId         String  @unique
+  user           User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  services Service[]
-  reviews  Review[]
+  // Personal information (Step 1 of verification wizard)
+  phone          String?
+  county         String?
+  town           String?
+  bio            String?
+  profilePhoto   String? // Cloudinary URL
+  location       String  @default("") // kept for search compat
+  experience     String  @default("")
+  availability   Boolean @default(true)
+
+  // Skill — FK to SkillCategory for extensibility
+  skillCategoryId String?
+  skillCategory   SkillCategory? @relation(fields: [skillCategoryId], references: [id])
+  skill           String         @default("") // mirrors skillCategory.name for search
+
+  // Trust & completion signals
+  verified          Boolean @default(false)  // true when verificationStatus = VERIFIED
+  verificationScore Int     @default(0)       // 0–100, signal breakdown
+  profileCompletion Int     @default(0)       // 0–100, dynamic engine
+
+  rating      Float @default(0)
+  reviewCount Int   @default(0)
+
+  // Future-proofing & monetization fields
+  isPremium    Boolean   @default(false)
+  boostedUntil DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  services     Service[]
+  reviews      Review[]
+  verification ArtisanVerification?
+  portfolio    PortfolioItem[]
+  profileViews ProfileView[]
+  trustEvents  TrustEvent[]
+  rankCache    ArtisanRankCache?
 
   @@map("artisans")
+}
+
+// ─────────────────────────────────────────────
+// PortfolioItem — photos of completed work
+// Ordered by sortOrder so artisan controls sequence.
+// ─────────────────────────────────────────────
+
+model PortfolioItem {
+  id          String  @id @default(cuid())
+  artisanId   String
+  artisan     Artisan @relation(fields: [artisanId], references: [id], onDelete: Cascade)
+
+  imageUrl    String  // Cloudinary URL
+  publicId    String  // Cloudinary public_id for deletion
+  caption     String?
+  sortOrder   Int     @default(0) // lower = shown first
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("portfolio_items")
+}
+
+
+// ─────────────────────────────────────────────
+// SkillCategory — extensible trades table
+// Add new categories without touching code.
+// ─────────────────────────────────────────────
+
+model SkillCategory {
+  id       String  @id @default(cuid())
+  name     String  @unique // "Electrician"
+  slug     String  @unique // "electrician"
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+
+  artisans Artisan[]
+
+  @@map("skill_categories")
+}
+
+// ─────────────────────────────────────────────
+// ArtisanVerification — ID + selfie submission
+// Separated from artisan profile intentionally.
+// ─────────────────────────────────────────────
+
+model ArtisanVerification {
+  id        String  @id @default(cuid())
+  artisanId String  @unique
+  artisan   Artisan @relation(fields: [artisanId], references: [id], onDelete: Cascade)
+
+  nationalIdNumber String
+  idFrontImage     String // Cloudinary URL
+  idBackImage      String // Cloudinary URL
+  selfieImage      String // Cloudinary URL
+
+  verificationStatus VerificationStatus @default(PENDING)
+
+  // Granular trust score: ID=40, Phone=20, Selfie=20, Location=20
+  verificationScore Int @default(0)
+
+  adminNote    String?  // Shown to artisan on rejection
+  verifiedAt   DateTime?
+  verifiedById String?  // Admin User.id who last acted
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  history VerificationHistory[]
+
+  @@map("artisan_verifications")
+}
+
+// ─────────────────────────────────────────────
+// VerificationHistory — full audit trail
+// Every status change recorded. Never deleted.
+// ─────────────────────────────────────────────
+
+model VerificationHistory {
+  id             String              @id @default(cuid())
+  verificationId String
+  verification   ArtisanVerification @relation(fields: [verificationId], references: [id], onDelete: Cascade)
+
+  // SUBMITTED | APPROVED | REJECTED | RESUBMITTED | SUSPENDED
+  action        String
+  performedById String  // User.id (admin or artisan)
+  reason        String? // Optional note at time of action
+
+  createdAt DateTime @default(now())
+
+  @@map("verification_history")
 }
 
 // ─────────────────────────────────────────────
@@ -70,17 +194,18 @@ model Artisan {
 // ─────────────────────────────────────────────
 
 model Service {
-  id          String   @id @default(cuid())
+  id          String  @id @default(cuid())
   artisanId   String
-  artisan     Artisan  @relation(fields: [artisanId], references: [id], onDelete: Cascade)
+  artisan     Artisan @relation(fields: [artisanId], references: [id], onDelete: Cascade)
   title       String
   category    String
   description String
   price       Float
-  priceUnit   String   @default("per job") // e.g. "per hour", "per day", "per job"
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  priceUnit   String  @default("per job") // "per hour", "per day", "per job"
+  isActive    Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("services")
 }
@@ -90,14 +215,81 @@ model Service {
 // ─────────────────────────────────────────────
 
 model Review {
-  id        String   @id @default(cuid())
+  id        String  @id @default(cuid())
   artisanId String
-  artisan   Artisan  @relation(fields: [artisanId], references: [id], onDelete: Cascade)
+  artisan   Artisan @relation(fields: [artisanId], references: [id], onDelete: Cascade)
   authorId  String
-  author    User     @relation("ReviewAuthor", fields: [authorId], references: [id], onDelete: Cascade)
-  rating    Int      // 1 – 5 stars
+  author    User    @relation("ReviewAuthor", fields: [authorId], references: [id], onDelete: Cascade)
+  rating    Int     // 1–5 stars
   comment   String
+
   createdAt DateTime @default(now())
 
   @@map("reviews")
+}
+
+// ─────────────────────────────────────────────
+// ProfileView — stage 0 views tracking
+// ─────────────────────────────────────────────
+
+model ProfileView {
+  id         String   @id @default(cuid())
+  artisanId  String
+  viewerId   String?
+  viewerIp   String
+  viewedAt   DateTime @default(now())
+
+  artisan    Artisan  @relation(fields: [artisanId], references: [id], onDelete: Cascade)
+
+  @@index([artisanId, viewedAt])
+  @@map("profile_views")
+}
+
+// ─────────────────────────────────────────────
+// TrustEvent — audit trail of trust score calculations
+// ─────────────────────────────────────────────
+
+model TrustEvent {
+  id          String   @id @default(cuid())
+  artisanId   String
+  eventType   String   // e.g. "ID_VERIFIED", "PROFILE_COMPLETED", "PORTFOLIO_UPLOADED", "REVIEW_RECEIVED"
+  points      Int      // points granted/changed (e.g. +40, +10)
+  description String
+  createdAt   DateTime @default(now())
+
+  artisan     Artisan  @relation(fields: [artisanId], references: [id], onDelete: Cascade)
+
+  @@index([artisanId, createdAt])
+  @@map("trust_events")
+}
+
+// ─────────────────────────────────────────────
+// ArtisanRankCache — materialized scores & ranks
+// ─────────────────────────────────────────────
+
+model ArtisanRankCache {
+  artisanId       String    @id
+  cachedScore     Float
+  cachedRank      Int
+  cachedPercentile Float?
+  resolvedBucket  String    // e.g. "Plumber-Nairobi" or "Plumber-County"
+  updatedAt       DateTime  @default(now())
+
+  artisan         Artisan   @relation(fields: [artisanId], references: [id], onDelete: Cascade)
+
+  @@map("artisan_rank_caches")
+}
+
+// ─────────────────────────────────────────────
+// WaitlistEntry — records monetization willingness-to-pay
+// ─────────────────────────────────────────────
+
+model WaitlistEntry {
+  id          String   @id @default(cuid())
+  artisanId   String
+  featureTag  String   // "BOOST_SERVICES" or "PREMIUM_ANALYTICS"
+  createdAt   DateTime @default(now())
+
+  @@unique([artisanId, featureTag])
+  @@map("waitlist_entries")
 }

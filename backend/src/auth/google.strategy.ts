@@ -13,7 +13,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     });
   }
 
-  async validate(
+  validate(
     accessToken: string,
     refreshToken: string,
     profile: any,
@@ -27,5 +27,6 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
       avatarUrl: photos[0]?.value,
     };
     done(null, user);
+    return Promise.resolve(user);
   }
 }

@@ -8,6 +8,9 @@ import { UsersModule } from './users/users.module';
 import { ArtisansModule } from './artisans/artisans.module';
 import { ServicesModule } from './services/services.module';
 import { ReviewsModule } from './reviews/reviews.module';
+import { VerificationModule } from './verification/verification.module';
+import { SkillCategoriesModule } from './skill-categories/skill-categories.module';
+import { PortfolioModule } from './portfolio/portfolio.module';
 import { JwtAuthGuard } from './common/guards/jwt-auth.guard';
 
 @Module({
@@ -18,6 +21,9 @@ import { JwtAuthGuard } from './common/guards/jwt-auth.guard';
     ArtisansModule,
     ServicesModule,
     ReviewsModule,
+    VerificationModule,
+    SkillCategoriesModule,
+    PortfolioModule,
   ],
   controllers: [AppController],
   providers: [

@@ -25,6 +25,10 @@ async function bootstrap() {
 
   const port = process.env.PORT || 3000;
   await app.listen(port);
-  console.log(`🚀 Majirani Skills API is running on: http://localhost:${port}/api`);
+  console.log(
+    `🚀 Majirani Skills API is running on: http://localhost:${port}/api`,
+  );
 }
-bootstrap();
+bootstrap().catch((err) => {
+  console.error('Failed to start server:', err);
+});

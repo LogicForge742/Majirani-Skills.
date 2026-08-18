@@ -53,7 +53,7 @@ export class AuthService {
       where: { email: dto.email },
     });
 
-    if (!user) {
+    if (!user || !user.password) {
       throw new UnauthorizedException('Invalid email or password.');
     }
 
@@ -90,7 +90,10 @@ export class AuthService {
       // If user exists by email but hasn't linked Google account, link it now
       user = await this.prisma.user.update({
         where: { id: user.id },
-        data: { googleId: googleUser.googleId, avatarUrl: googleUser.avatarUrl },
+        data: {
+          googleId: googleUser.googleId,
+          avatarUrl: googleUser.avatarUrl,
+        },
       });
     }
 

@@ -1,4 +1,4 @@
-import { PrismaClient, Role } from '@prisma/client';
+import { PrismaClient, Role, VerificationStatus } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
@@ -7,12 +7,35 @@ async function main() {
   console.log('🌱 Starting database seed...');
 
   // Clean existing data in dependency order
+  await prisma.verificationHistory.deleteMany();
+  await prisma.artisanVerification.deleteMany();
   await prisma.review.deleteMany();
   await prisma.service.deleteMany();
   await prisma.artisan.deleteMany();
+  await prisma.skillCategory.deleteMany();
   await prisma.user.deleteMany();
 
   const salt = await bcrypt.genSalt(10);
+
+  // ─── Skill Categories ──────────────────────────────────────
+  // These live in the DB so new trades can be added without code changes.
+
+  const skills = await Promise.all([
+    prisma.skillCategory.create({ data: { name: 'Electrician', slug: 'electrician' } }),
+    prisma.skillCategory.create({ data: { name: 'Plumber', slug: 'plumber' } }),
+    prisma.skillCategory.create({ data: { name: 'Carpenter', slug: 'carpenter' } }),
+    prisma.skillCategory.create({ data: { name: 'Welder', slug: 'welder' } }),
+    prisma.skillCategory.create({ data: { name: 'Mason', slug: 'mason' } }),
+    prisma.skillCategory.create({ data: { name: 'Painter', slug: 'painter' } }),
+    prisma.skillCategory.create({ data: { name: 'Tailor', slug: 'tailor' } }),
+    prisma.skillCategory.create({ data: { name: 'Solar Installer', slug: 'solar-installer' } }),
+    prisma.skillCategory.create({ data: { name: 'CCTV Technician', slug: 'cctv-technician' } }),
+    prisma.skillCategory.create({ data: { name: 'Aluminium Fabricator', slug: 'aluminium-fabricator' } }),
+  ]);
+
+  const [electrician, plumber, carpenter] = skills;
+
+  console.log(`  ✓ Seeded ${skills.length} skill categories`);
 
   // ─── Users ───────────────────────────────────────────────
 
@@ -61,13 +84,18 @@ async function main() {
   const artisan1 = await prisma.artisan.create({
     data: {
       userId: artisanUser.id,
-      skill: 'Plumbing',
-      bio: 'Certified plumber with over 8 years of experience. Specializing in residential and commercial installations, repairs, and maintenance.',
+      skillCategoryId: plumber.id,
+      skill: plumber.name,
+      phone: '+254722000002',
+      bio: 'Certified plumber with over 8 years of experience. Specialising in residential and commercial installations, repairs, and maintenance.',
       location: 'Nairobi, Westlands',
       county: 'Nairobi',
+      town: 'Westlands',
       experience: '8 years',
       availability: true,
       verified: true,
+      verificationScore: 80,
+      profileCompletion: 85,
       rating: 4.7,
       reviewCount: 1,
     },
@@ -76,16 +104,53 @@ async function main() {
   const artisan2 = await prisma.artisan.create({
     data: {
       userId: artisanUser2.id,
-      skill: 'Carpentry',
-      bio: 'Expert carpenter specializing in custom furniture, cabinetry, and interior woodwork. Passionate about precision and craftsmanship.',
+      skillCategoryId: carpenter.id,
+      skill: carpenter.name,
+      phone: '+254733000003',
+      bio: 'Expert carpenter specialising in custom furniture, cabinetry, and interior woodwork. Passionate about precision and craftsmanship.',
       location: 'Nairobi, Karen',
       county: 'Nairobi',
+      town: 'Karen',
       experience: '5 years',
       availability: true,
       verified: true,
+      verificationScore: 60,
+      profileCompletion: 70,
       rating: 4.5,
       reviewCount: 0,
     },
+  });
+
+  // ─── Verifications (approved) ────────────────────────────
+
+  const verification1 = await prisma.artisanVerification.create({
+    data: {
+      artisanId: artisan1.id,
+      nationalIdNumber: '12345678',
+      idFrontImage: 'https://res.cloudinary.com/demo/image/upload/sample.jpg',
+      idBackImage: 'https://res.cloudinary.com/demo/image/upload/sample.jpg',
+      selfieImage: 'https://res.cloudinary.com/demo/image/upload/sample.jpg',
+      verificationStatus: VerificationStatus.VERIFIED,
+      verificationScore: 80,
+      verifiedAt: new Date(),
+      verifiedById: adminUser.id,
+    },
+  });
+
+  await prisma.verificationHistory.createMany({
+    data: [
+      {
+        verificationId: verification1.id,
+        action: 'SUBMITTED',
+        performedById: artisanUser.id,
+      },
+      {
+        verificationId: verification1.id,
+        action: 'APPROVED',
+        performedById: adminUser.id,
+        reason: 'Documents clear and valid.',
+      },
+    ],
   });
 
   // ─── Services ────────────────────────────────────────────
@@ -148,6 +213,7 @@ async function main() {
   console.log('  Client  → john.doe@gmail.com        / Client@1234');
   console.log('  Artisan → peter.mwangi@gmail.com   / Artisan@1234');
   console.log('  Artisan → grace.wanjiku@gmail.com  / Artisan@1234');
+  console.log('\n🎯 Seeded Skill Categories: Electrician, Plumber, Carpenter, Welder, Mason, Painter, Tailor, Solar Installer, CCTV Technician, Aluminium Fabricator');
 }
 
 main()
